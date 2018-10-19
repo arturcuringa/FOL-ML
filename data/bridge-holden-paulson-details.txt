@@ -117,6 +117,7 @@
    Training set:     556  229  373  303  312  1286
    Validation set:   260  133  187  146  159  644
    Test set:         273  124  188  168  153  624
+   All:              1089 486  748  617  624  2554
 
 10. Attribute statistics:
 
