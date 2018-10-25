@@ -74,7 +74,7 @@ cost, pos = optimizer.optimize(f_corr, print_step=100, iters=1000, verbose=2)
 
 
 selected_attrs = list(compress(X.columns, pos))
-print(cos, len(selected_attrs), selected_attrs)
+print(cost, len(selected_attrs), selected_attrs)
 print()
 
 X = X[selected_attrs]
