@@ -28,20 +28,18 @@ def fitness_corr(individual, idx_corr):
 
 def fitness_knn(individual, X_y):
     X, y = X_y
-    X = X[individual]
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, stratify=y, test_size=0.3, random_state=random_seed)
+    fitness = 0
+    selected_attrs = list(compress(X.columns, individual))
+    if selected_attrs:
+        X = X[selected_attrs]
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, stratify=y, test_size=0.3, random_state=random_seed)
 
-    knn = KNeighborsClassifier()
-    knn.fit(X_train, y_train)
-    y_pred = knn.predict(X_test)
-    return accuracy_score(y_test, y_pred)
-
-def create_individual(X_y):
-    X, y = X_y
-    features = X.columns
-    selected = [random.randint(0, 1) for _ in features]
-    return list(compress(features, selected))
+        knn = KNeighborsClassifier()
+        knn.fit(X_train, y_train)
+        y_pred = knn.predict(X_test)
+        fitness = accuracy_score(y_test, y_pred)
+    return fitness
 
 random_seed = 42
 df = pd.read_csv("data/all-data-raw.csv", header=None)
@@ -61,10 +59,9 @@ X_val.update(scaler.transform(X_val))
 # idx_corr = list(zip(abs_correlations.index, abs_correlations))
 # ga = pyeasyga.GeneticAlgorithm(idx_corr)
 
-ga = pyeasyga.GeneticAlgorithm((X, y), generations=20)
+ga = pyeasyga.GeneticAlgorithm((X, y), generations=50)
 
 ga.fitness_function = fitness_knn
-ga.create_individual = create_individual
 ga.run()
 
 score, individual = ga.best_individual()
