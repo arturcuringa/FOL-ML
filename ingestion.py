@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 
 _random_seed = 42
 
-def _get_data():
+def get_data():
 	df = pd.read_csv("data/all-data-ready.csv", index_col=0)
 	X, y = df.drop(['heuristic'], axis=1).astype('float64'), df['heuristic']
 	return X, y
@@ -15,7 +15,7 @@ def get_raw():
 
 	X, X_test, y, y_test = train_test_split(
 	    X, y, stratify=y, test_size=0.1, random_state=_random_seed)
-	
+
 	return X, X_test, y, y_test
 
 def get_pca():
