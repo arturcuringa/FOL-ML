@@ -15,14 +15,16 @@ def get_raw():
 
 	X, X_test, y, y_test = train_test_split(
 	    X, y, stratify=y, test_size=0.1, random_state=_random_seed)
-
-	scaler = StandardScaler()
-	X.update(scaler.fit_transform(X))
-	X_test.update(scaler.transform(X_test))
+	
 	return X, X_test, y, y_test
 
 def get_pca():
 	X, X_test, y, y_test = get_raw()
+
+	scaler = StandardScaler()
+	X.update(scaler.fit_transform(X))
+	X_test.update(scaler.transform(X_test))
+
 	pca_ = PCA(0.96)
 	pca_.fit(X)
 	X_pca = pd.DataFrame(pca_.transform(X))
