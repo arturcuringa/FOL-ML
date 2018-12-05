@@ -22,8 +22,8 @@ def get_pca():
 	X, X_test, y, y_test = get_raw()
 
 	scaler = StandardScaler()
-	X.update(scaler.fit_transform(X))
-	X_test.update(scaler.transform(X_test))
+	X = pd.DataFrame(scaler.fit_transform(X))
+	X_test = pd.DataFrame(scaler.transform(X_test))
 
 	pca_ = PCA(0.96)
 	pca_.fit(X)
