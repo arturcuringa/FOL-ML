@@ -11,7 +11,7 @@ def get_data():
 	return X, y
 
 def get_raw():
-	X, y = _get_data()
+	X, y = get_data()
 
 	X, X_test, y, y_test = train_test_split(
 	    X, y, stratify=y, test_size=0.1, random_state=_random_seed)
