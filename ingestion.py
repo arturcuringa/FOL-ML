@@ -32,7 +32,7 @@ def get_pca():
 	return X_pca, X_test_pca, y, y_test
 
 def get_full_pca():
-	X, y = get_data
+	X, y = get_data()
 
 	scaler = StandardScaler()
 	X = pd.DataFrame(scaler.fit_transform(X))
