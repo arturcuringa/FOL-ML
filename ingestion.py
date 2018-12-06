@@ -30,3 +30,14 @@ def get_pca():
 	X_pca = pd.DataFrame(pca_.transform(X))
 	X_test_pca = pd.DataFrame(pca_.transform(X_test))
 	return X_pca, X_test_pca, y, y_test
+
+def get_full_pca():
+	X, y = get_data
+
+	scaler = StandardScaler()
+	X = pd.DataFrame(scaler.fit_transform(X))
+
+	pca_ = PCA(0.96)
+	X_pca = pd.DataFrame(pca_.fit_transform(X))
+
+	return X_pca, y
