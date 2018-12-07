@@ -12,7 +12,7 @@ def knn(ingest, scale):
     X, X_test, y, y_test = ingest()
 
     params = {
-        'classifier__n_neighbors': list(range(10, 21)),
+        'classifier__n_neighbors': list(range(5, 16)),
         'classifier__weights' : ['distance', 'uniform']
     }
 
